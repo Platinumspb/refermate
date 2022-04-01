@@ -1,4 +1,3 @@
-import re
 
 class JobModel:
     client: str

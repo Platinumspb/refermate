@@ -13,8 +13,9 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 # The ID and range of a sample spreadsheet.
 # Store spreadsheet_id as env variable on Heroku
-SAMPLE_SPREADSHEET_ID = os.environ.get('token')
-SAMPLE_RANGE_NAME = 'Sheet1'
+# To run locally specify the actual spreadsheet_id
+SPREADSHEET_ID = os.environ.get('token')
+RANGE_NAME = 'Sheet1'
 
 
 class GoogleSheetsDataProvider:
@@ -34,9 +35,9 @@ class GoogleSheetsDataProvider:
         # token_json = json.loads(token)
         # creds = Credentials.from_authorized_user_info(token_json, SCOPES)
 
-        # Comment the above part of the code.
+        # Comment out the above part of the code.
         # Uncomment and run this part of the code prior to running it on Heroku to get the credentials.
-        # Open the token.json file, copy and save the content as an env variable on Heroku.
+        # Open the token.json file, copy and save the content as 'token' env variable on Heroku.
         if os.path.exists('token.json'):
             creds = Credentials.from_authorized_user_file('token.json', SCOPES)
         # If there are no (valid) credentials available, let the user log in.
@@ -58,8 +59,8 @@ class GoogleSheetsDataProvider:
 
             # Call the Sheets API
             sheet = service.spreadsheets()
-            result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
-                                        range=SAMPLE_RANGE_NAME,
+            result = sheet.values().get(spreadsheetId=SPREADSHEET_ID,
+                                        range=RANGE_NAME,
                                         valueRenderOption='FORMULA').execute()
             values = result.get('values', [])
             if not values:
