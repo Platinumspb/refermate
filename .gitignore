@@ -3,3 +3,6 @@
 
 # PyCharm files
 .idea/
+
+# Cache
+__pycache__
