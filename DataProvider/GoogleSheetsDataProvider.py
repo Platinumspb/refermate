@@ -14,7 +14,7 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 # The ID and range of a sample spreadsheet.
 # Store spreadsheet_id as env variable on Heroku
 # To run locally specify the actual spreadsheet_id
-SPREADSHEET_ID = os.environ.get('token')
+SPREADSHEET_ID = os.environ.get('spreadsheet_id')
 RANGE_NAME = 'Sheet1'
 
 
@@ -31,15 +31,15 @@ class GoogleSheetsDataProvider:
 
         # This part is used to authenticate from Heroku. Comment this part of the code out to run on local
         # environment or to get token.json file prior to running on Heroku.
-        # token = os.environ.get('token')
-        # token_json = json.loads(token)
-        # creds = Credentials.from_authorized_user_info(token_json, SCOPES)
+        token = os.environ.get('token')
+        token_json = json.loads(token)
+        creds = Credentials.from_authorized_user_info(token_json, SCOPES)
 
         # Comment out the above part of the code.
         # Uncomment and run this part of the code prior to running it on Heroku to get the credentials.
         # Open the token.json file, copy and save the content as 'token' env variable on Heroku.
-        if os.path.exists('token.json'):
-            creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+        # if os.path.exists('token.json'):
+        #     creds = Credentials.from_authorized_user_file('token.json', SCOPES)
         # If there are no (valid) credentials available, let the user log in.
         if not creds or not creds.valid:
             if creds and creds.expired and creds.refresh_token:
