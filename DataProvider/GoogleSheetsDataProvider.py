@@ -12,7 +12,8 @@ from googleapiclient.errors import HttpError
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 # The ID and range of a sample spreadsheet.
-SAMPLE_SPREADSHEET_ID = '1MsvTwTtaZMfxHs1zgGaf_o5MHPk7rjGb7bu0vLKKnIk'
+# Store spreadsheet_id as env variable on Heroku
+SAMPLE_SPREADSHEET_ID = os.environ.get('token')
 SAMPLE_RANGE_NAME = 'Sheet1'
 
 
